@@ -15,19 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping(path = "/api/v1", produces="application/json")
 public class PokemonController {
-
     private final String baseURL = "https://pokeapi.co/api/v2";
-
-    @Autowired
-    private PokemonService service;
-
+    private final PokemonService service;
     private final RestTemplate restTemplate;
 
-
-
-    public PokemonController(RestTemplate restTemplate) {
+    public PokemonController(PokemonService service, RestTemplate restTemplate) {
+        this.service = service;
         this.restTemplate = restTemplate;
     }
 
@@ -36,8 +31,6 @@ public class PokemonController {
         if(service.getAllPokemonFromPokedex().isEmpty()){
             populatePokedexByGeneration(1);
         }
-        System.out.println("<++++++ RETURNING OBJECT +++++++>");
-        System.out.println(service.getAllPokemonFromPokedex());
         return service.getAllPokemonFromPokedex();
     }
 
@@ -48,19 +41,18 @@ public class PokemonController {
                 uri, PokemonGeneration.class);
 
         List<PokemonSpecies> newPokeList = new ArrayList<>();
-        List<NamedApiResource> tempList = result.getPokemonSpecies();
+        List<NamedApiResource> resourceList = result.getPokemonSpecies();
 
-        for(int i = 0; i <= 151; i++) {
-            newPokeList.add(getPokemonSpeciesData(tempList.get(i).getUrl()));
+        int idCounter = 1;
+        for(NamedApiResource n : resourceList) {
+            newPokeList.add(getPokemonSpeciesData(n.getUrl()));
+            idCounter++;
         }
-
         service.saveSpeciesToPokedex(newPokeList);
-
         return result;
     }
 
     private PokemonSpecies getPokemonSpeciesData(String url){
         return restTemplate.getForObject(url, PokemonSpecies.class);
-
     }
 }

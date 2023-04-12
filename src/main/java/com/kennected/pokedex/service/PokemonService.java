@@ -12,9 +12,11 @@ import java.util.stream.Collectors;
 @Service
 public class PokemonService {
 
+    private final PokemonRepository repository;
 
-    @Autowired
-    private PokemonRepository repository;
+    public PokemonService(PokemonRepository repository) {
+        this.repository = repository;
+    }
 
     public List<PokemonSpeciesDto> getAllPokemonFromPokedex() {
         return repository.getAllPokemonFromPokedexAsList()
@@ -34,6 +36,5 @@ public class PokemonService {
     public List<PokemonSpecies> saveSpeciesToPokedex(List<PokemonSpecies> pokeSpecies) {
         return repository.saveSpeciesToPokedex(pokeSpecies);
     }
-
 
 }
