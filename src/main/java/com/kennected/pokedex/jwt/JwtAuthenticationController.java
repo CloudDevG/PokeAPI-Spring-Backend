@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class JwtAuthenticationController {
-
     private final JwtTokenService tokenService;
 
     private final AuthenticationManager authenticationManager;

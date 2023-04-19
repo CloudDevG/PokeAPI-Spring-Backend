@@ -9,7 +9,7 @@ public class PokemonSpeciesDto {
     private int orderId;
     @NotEmpty(message = "Field 'name' for PokemonSpecies must contain a String value")
     private String name;
-    @NotEmpty(message = "Field 'name' for PokemonSpecies must contain a String value")
+    @NotEmpty(message = "Field 'color' for PokemonSpecies must contain a String value")
     private String color;
 
     public int getOrderId() {
