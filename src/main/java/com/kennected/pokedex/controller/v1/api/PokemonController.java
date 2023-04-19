@@ -5,8 +5,8 @@ import com.kennected.pokedex.entity.NamedApiResource;
 import com.kennected.pokedex.entity.PokemonGeneration;
 import com.kennected.pokedex.entity.PokemonSpecies;
 import com.kennected.pokedex.service.PokemonService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -26,10 +26,10 @@ public class PokemonController {
         this.restTemplate = restTemplate;
     }
 
-    @GetMapping("/pokedex")
-    public List<PokemonSpeciesDto> findAllPokemon() {
+    @GetMapping("/pokedex/gen/{genId}")
+    public List<PokemonSpeciesDto> findAllPokemonByGeneration(@PathVariable int genId) {
         if(service.getAllPokemonFromPokedex().isEmpty()){
-            populatePokedexByGeneration(1);
+            populatePokedexByGeneration(genId);
         }
         return service.getAllPokemonFromPokedex();
     }
@@ -39,7 +39,6 @@ public class PokemonController {
 
         PokemonGeneration result = restTemplate.getForObject(
                 uri, PokemonGeneration.class);
-
         List<PokemonSpecies> newPokeList = new ArrayList<>();
         List<NamedApiResource> resourceList = result.getPokemonSpecies();
 

@@ -11,7 +11,6 @@ public class PokemonRepository {
 
     private List<PokemonSpecies> pokedex = new ArrayList<PokemonSpecies>();
 
-
     public List<PokemonSpecies> getAllPokemonFromPokedexAsList() {
         return pokedex;
     }

@@ -3,7 +3,6 @@ package com.kennected.pokedex.service;
 import com.kennected.pokedex.dto.PokemonSpeciesDto;
 import com.kennected.pokedex.entity.PokemonSpecies;
 import com.kennected.pokedex.repository.PokemonRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
