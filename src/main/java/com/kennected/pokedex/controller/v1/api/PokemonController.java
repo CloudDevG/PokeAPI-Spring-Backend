@@ -41,11 +41,9 @@ public class PokemonController {
                 uri, PokemonGeneration.class);
         List<PokemonSpecies> newPokeList = new ArrayList<>();
         List<NamedApiResource> resourceList = result.getPokemonSpecies();
-
-        int idCounter = 1;
+        
         for(NamedApiResource n : resourceList) {
             newPokeList.add(getPokemonSpeciesData(n.getUrl()));
-            idCounter++;
         }
         service.saveSpeciesToPokedex(newPokeList);
         return result;
