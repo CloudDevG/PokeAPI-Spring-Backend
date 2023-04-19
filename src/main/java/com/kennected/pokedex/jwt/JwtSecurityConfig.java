@@ -76,7 +76,6 @@ public class JwtSecurityConfig {
                 .authorities("read")
                 .roles("USER")
                 .build();
-
         return new InMemoryUserDetailsManager(user);
     }
 
