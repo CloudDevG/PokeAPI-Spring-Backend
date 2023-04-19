@@ -1,9 +1,15 @@
 package com.kennected.pokedex.dto;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
 public class PokemonSpeciesDto {
 
+    @NotNull(message = "Field 'orderId' for PokemonSpecies must not be null")
     private int orderId;
+    @NotEmpty(message = "Field 'name' for PokemonSpecies must contain a String value")
     private String name;
+    @NotEmpty(message = "Field 'name' for PokemonSpecies must contain a String value")
     private String color;
 
     public int getOrderId() {
